@@ -1,0 +1,15 @@
+<h1>Notes</h1>
+
+{% if request.user.is_authenticated %}
+  <a href="{% url 'note-create' %}">Create new note</a>
+{% endif %}
+
+<ul>
+{% for note in object_list %}
+    <li><a href="{% url 'note-detail' note.pk %}">{{ note.title }}</a></li>
+{% empty %}
+    <li>No notes yet.</li>
+{% endfor %}
+</ul>
+
+{{ request.user.is_authenticated }}

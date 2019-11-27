@@ -1,0 +1,13 @@
+<h1>{{ note.title }} by {{ note.author }}</h1>
+
+{% if request.user.is_authenticated %}
+  <a href="{% url 'note-update' note.pk %}">Update note</a>
+  <a href="{% url 'note-delete' note.pk %}">Delete Note</a>
+{% endif %}
+
+<h3>Published: {{ note.published_at }}</h3>
+
+<p>{{ note.body }}</p>
+
+
+<a href="{% url 'note-list' %}">&laquo; Notes Index</a>
