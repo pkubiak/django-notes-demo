@@ -4,7 +4,7 @@ from notes.models import Note, Topic
 
 
 class NoteAdmin(admin.ModelAdmin):
-    list_display = ('title', 'author', 'published_at')
+    list_display = ('title', 'author', 'created', 'modified')
 
 
 class TopicAdmin(admin.ModelAdmin):

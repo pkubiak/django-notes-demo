@@ -5,7 +5,7 @@
   <a href="{% url 'note-delete' note.pk %}">Delete Note</a>
 {% endif %}
 
-<h3>Published: {{ note.published_at }}; Topic: {{ note.topic }}</h3>
+<h3>Created: {{ note.created }}; Modified: {{ note.modified }}; Topic: {{ note.topic }}</h3>
 
 <p>{{ note.body }}</p>
 

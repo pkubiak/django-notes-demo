@@ -10,10 +10,9 @@ class Topic(TitleSlugDescriptionModel, TimeStampedModel, models.Model):
         return self.title
 
 
-class Note(models.Model):
+class Note(TimeStampedModel, models.Model):
     title = models.CharField(max_length=256)
     body = models.TextField()
-    published_at = models.DateTimeField()
     topic = models.ForeignKey(Topic, on_delete=models.CASCADE, null=True)
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 
