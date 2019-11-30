@@ -1,3 +1,6 @@
+{% load mptt_tags %}
+
+
 <h1>{{ note.title }} by {{ note.author }}</h1>
 
 {% if request.user.is_authenticated %}
@@ -5,7 +8,15 @@
   <a href="{% url 'note-delete' note.pk %}">Delete Note</a>
 {% endif %}
 
-<h3>Created: {{ note.created }}; Modified: {{ note.modified }}; Topic: {{ note.topic }}</h3>
+<h3>Created: {{ note.created }}; Modified: {{ note.modified }};</h3>
+
+<h3>Topic:
+{% for topic in note.topics %}
+  {{ topic }}
+
+  {% if not forloop.last %} &raquo; {% endif %}
+{% endfor %}
+</h3>
 
 <p>{{ note.body }}</p>
 

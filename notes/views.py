@@ -18,7 +18,7 @@ class NoteDetailView(DetailView):
 
 class NoteCreateView(CreateView):
     model = Note
-    fields = ['title', 'body']
+    fields = ['title', 'body', 'topic']
 
     def form_valid(self, form):
         form.instance.author = self.request.user
@@ -31,7 +31,7 @@ class NoteCreateView(CreateView):
 
 class NoteUpdateView(UserPassesTestMixin, UpdateView):
     model = Note
-    fields = ['title', 'body']
+    fields = ['title', 'body', 'topic']
 
     def test_func(self):
         return self.request.user == self.get_object().author
