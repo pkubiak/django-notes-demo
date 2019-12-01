@@ -9,8 +9,8 @@ class NoteAdmin(admin.ModelAdmin):
 
 
 class TopicAdmin(DjangoMpttAdmin):
-    list_display = ('slug', 'title', 'description', 'created', 'modified')
-
+    list_display = ('slug', 'title', 'description', 'created', 'modified', 'public')
+    list_editable = ('public', )
 
 
 admin.site.register(Note, NoteAdmin)

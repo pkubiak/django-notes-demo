@@ -7,6 +7,7 @@ from mptt.models import MPTTModel, TreeForeignKey
 
 
 class Topic(TitleSlugDescriptionModel, TimeStampedModel, MPTTModel):
+    public = models.BooleanField(blank=False, default=True)
     parent = TreeForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='children')
 
     class MPTTMeta:
