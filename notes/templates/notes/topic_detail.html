@@ -1,0 +1,8 @@
+{{ topic.title }}
+
+{{ topic.description }}
+
+
+<a href="{% url 'topic-update' topic.pk %}">Edit</a>
+
+<a href="{% url 'topic-delete' topic.pk %}">Delete</a>

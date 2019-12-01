@@ -4,7 +4,7 @@ from django.urls import reverse_lazy
 from django.contrib.auth.mixins import UserPassesTestMixin
 
 
-from notes.models import Note
+from notes.models import Note, Topic
 import time
 
 
@@ -43,3 +43,26 @@ class NoteDeleteView(UserPassesTestMixin, DeleteView):
 
     def test_func(self):
         return self.request.user.is_staff or (self.request.user == self.get_object().author)
+
+########################################################################################################
+
+class TopicListView(ListView):
+    model = Topic
+
+
+class TopicDetailView(DetailView):
+    model = Topic
+
+
+class TopicCreateView(CreateView):
+    model = Topic
+    fields = ['title', 'description', 'public', 'parent']
+
+
+class TopicUpdateView(UpdateView):
+    model = Topic
+    fields = ['title', 'description', 'public', 'parent']
+
+class TopicDeleteView(DeleteView):
+    model = Topic
+    success_url = reverse_lazy('topic-list')

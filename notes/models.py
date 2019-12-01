@@ -16,6 +16,9 @@ class Topic(TitleSlugDescriptionModel, TimeStampedModel, MPTTModel):
     def __str__(self):
         return self.title
 
+    def get_absolute_url(self):
+        return reverse('topic-detail', kwargs={'pk': self.pk})
+
 
 class Note(TimeStampedModel, models.Model):
     title = models.CharField(max_length=256)
