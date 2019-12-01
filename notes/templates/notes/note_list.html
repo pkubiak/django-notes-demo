@@ -1,15 +1,39 @@
-<h1>Notes</h1>
+{% extends "memoizer/base.html" %}
 
-{% if request.user.is_authenticated %}
-  <a href="{% url 'note-create' %}">Create new note</a>
-{% endif %}
+{% block content %}
+<h1 class="d-flex justify-content-between">
+  <span>Notes</span>
 
-<ul>
+  {% if request.user.is_authenticated %}
+  <div>
+    <a href="{% url 'note-create' %}" class="btn btn-success">Create new note</a>
+  </div>
+  {% endif %}
+</h1>
+
 {% for note in object_list %}
-    <li><a href="{% url 'note-detail' note.pk %}">{{ note.title }}</a></li>
-{% empty %}
-    <li>No notes yet.</li>
-{% endfor %}
-</ul>
+  <div class="card mb-3">
+    <div class="card-body">
+      <div class="card-title d-flex w-100 justify-content-between">
+        <h5 class="mb-1 card-title">{{ note.title }}</h5>
+        <small>{{ note.created }}</small>
+      </div>
+      <h6 class="card-subtitle mb-2 text-muted">
+        {% if note.topics %}
+          {% for topic in note.topics %}
+            {{ topic }}
 
-{{ request.user.is_authenticated }}
+            {% if not forloop.last %} &raquo; {% endif %}
+          {% endfor %}
+        {% endif %}
+      </h6>
+      <p class="card-text">{{ note.body }}</p>
+      <a href="{% url 'note-detail' note.pk %}" class="stretched-link">Show details</a>
+    </div>
+  </div>
+{% empty %}
+  No notes yet.
+{% endfor %}
+</div>
+
+{% endblock %}

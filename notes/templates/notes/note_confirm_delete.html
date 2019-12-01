@@ -1,5 +1,22 @@
-<form action="" method="post">
-    {% csrf_token %}
-    {{ object }}
-    <input type="submit" value="Confirm deletation" />
-</form>
+{% extends "memoizer/base.html" %}
+
+{% block content %}
+  <form action="" method="post">
+      {% csrf_token %}
+
+
+      <div class="mx-auto my-5 card w-75">
+        <div class="card-body">
+          <h5 class="card-title">Deletation confirmation!</h5>
+          <p class="card-text">You are about to delete object: {{ object.title }} by {{ object.author }}</p>
+
+          <div class="text-right mt-4">
+            <button onclick="javascript:window.history.back();" class="btn btn-primary">Cancel</button>
+            <input type="submit" value="Confirm deletation" class="btn btn-danger"/>
+          </div>
+        </div>
+      </div>
+  </form>
+
+
+{% endblock %}

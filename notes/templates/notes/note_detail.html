@@ -1,24 +1,35 @@
+{% extends "memoizer/base.html" %}
 {% load mptt_tags %}
 
 
-<h1>{{ note.title }} by {{ note.author }}</h1>
+{% block content %}
+  <h1 class="d-flex justify-content-between">
+    <span>{{ note.title }} by {{ note.author }}</span>
 
-{% if request.user.is_authenticated %}
-  <a href="{% url 'note-update' note.pk %}">Update note</a>
-  <a href="{% url 'note-delete' note.pk %}">Delete Note</a>
-{% endif %}
+    {% if request.user.is_authenticated %}
+      <div>
+        <a href="{% url 'note-update' note.pk %}" class="btn btn-outline-primary">Update note</a>
+        <a href="{% url 'note-delete' note.pk %}" class="btn btn-outline-danger">Delete Note</a>
+      </div>
+    {% endif %}
+  </h1>
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      {% for topic in note.topics %}
+          <li class="breadcrumb-item"><a href="#">{{ topic }}</a></li>
+      {% endfor %}
+    </ol>
+  </nav>
+  <!-- <h3>Created: {{ note.created }}; Modified: {{ note.modified }};</h3> -->
 
-<h3>Created: {{ note.created }}; Modified: {{ note.modified }};</h3>
-
-<h3>Topic:
-{% for topic in note.topics %}
-  {{ topic }}
-
-  {% if not forloop.last %} &raquo; {% endif %}
-{% endfor %}
-</h3>
-
-<p>{{ note.body }}</p>
 
 
-<a href="{% url 'note-list' %}">&laquo; Notes Index</a>
+  <div class="card">
+    <div class="card-body">
+      <p class="card-text">{{ note.body }}</p>
+    </div>
+  </div>
+
+  <hr/>
+  <a href="{% url 'note-list' %}" class="btn btn-primary">&laquo; Notes Index</a>
+{% endblock %}

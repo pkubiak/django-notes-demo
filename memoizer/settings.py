@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django_extensions',
     'mptt',
     'django_mptt_admin',
+    'bootstrapform',
     'notes',
 ]
 
@@ -58,7 +59,9 @@ ROOT_URLCONF = 'memoizer.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            os.path.join(BASE_DIR, 'memoizer', 'templates'),
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

@@ -31,4 +31,4 @@ class Note(TimeStampedModel, models.Model):
 
     @property
     def topics(self):
-        return self.topic.get_ancestors(ascending=False, include_self=True)
+        return self.topic.get_ancestors(ascending=False, include_self=True) if self.topic else None
